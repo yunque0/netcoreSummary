@@ -1,5 +1,3 @@
-@[TOC](博文目录）
-
 ## 前言
 
 [原文链接](https://stackoverflow.com/questions/38138100/addtransient-addscoped-and-addsingleton-services-differences)
@@ -61,7 +59,7 @@ namespace DependencyInjectionSample.Interfaces
 }
 ```
 
-然后实现一个继承了上面所有不同生命周期接口的类，这样之后就可以通过注入不同的接口和同一个类来实现不同生命周期对象的注入。
+然后实现一个继承了上面所有不同生命周期接口的类。
 
 ```c#
 using System;
@@ -86,7 +84,7 @@ namespace DependencyInjectionSample.Classes
 }
 ```
 
-然后在ConfigureService中把这些对象都注入进入
+然后在ConfigureService中把这些对象都注入依赖注入容器。
 
 ```c#
 services.AddTransient<IOperationTransient, Operation>();
@@ -174,18 +172,20 @@ namespace DependencyInjectionSample.Controllers
 
 在Request了两次之后，结果如下
 
-![image-20211128000213079](C:\Users\rongchen\AppData\Roaming\Typora\typora-user-images\image-20211128000213079.png)
+![image-20211128000213079](https://yunquelark.oss-cn-beijing.aliyuncs.com/transientandScoped1.png)
 
-![image-20211128000234039](C:\Users\rongchen\AppData\Roaming\Typora\typora-user-images\image-20211128000234039.png)
+![image-20211128000234039](https://yunquelark.oss-cn-beijing.aliyuncs.com/transientandScoped2.png)
 
-通过观察OperationId，可以看出，Singleton的对象在不同的request里都是一样的，Scoped对象在同一个request里是一样的，而Transient对象即使在同一request里面，每次出现都是不一样的。
+通过观察OperationId，可以看出，Singleton的对象在不同的request里都是一样的，Scoped对象在同一个request里是一样的，而Transient对象即使在同一request里面，每次出现都是不一样的。这与开头的结论一致。
 
 
 ___
 
 ## 参考资料
 
-* [微软文档](https://docs.microsoft.com/dotnet/core/extensions/dependency-injection-usage)
-* [翻译原文](https://stackoverflow.com/questions/38138100/addtransient-addscoped-and-addsingleton-services-differences)
+​	*[微软文档](https://docs.microsoft.com/dotnet/core/extensions/dependency-injection-usage)
 
-示例代码可以在仓库中的ToLearnnet文件夹中找到。
+​	*[翻译原文](https://stackoverflow.com/questions/38138100/addtransient-addscoped-and-addsingleton-services-differences)
+
+​	*[示例代码](https://github.com/yunque0/netcoreSummary/tree/main/ToLearnnet/DependencyInjectionSample)
+
